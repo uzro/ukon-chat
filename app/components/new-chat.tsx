@@ -6,7 +6,6 @@ import styles from "./new-chat.module.scss";
 
 import LeftIcon from "../icons/left.svg";
 import LightningIcon from "../icons/lightning.svg";
-import EyeIcon from "../icons/eye.svg";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { Mask, useMaskStore } from "../store/mask";
@@ -14,8 +13,8 @@ import Locale from "../locales";
 import { useAppConfig, useChatStore } from "../store";
 import { MaskAvatar } from "./mask";
 import { useCommand } from "../command";
-import { showConfirm } from "./ui-lib";
 import { BUILTIN_MASK_STORE } from "../masks";
+import clsx from "clsx";
 
 export function MaskItem(props: { mask: Mask; onClick?: () => void }) {
   return (
@@ -24,7 +23,9 @@ export function MaskItem(props: { mask: Mask; onClick?: () => void }) {
         avatar={props.mask.avatar}
         model={props.mask.modelConfig.model}
       />
-      <div className={styles["mask-name"] + " one-line"}>{props.mask.name}</div>
+      <div className={clsx(styles["mask-name"], "one-line")}>
+        {props.mask.name}
+      </div>
     </div>
   );
 }

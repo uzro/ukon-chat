@@ -136,13 +136,34 @@
 .sidebar-header {
   position: relative;
   padding-top: 20px;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &-narrow {
+    justify-content: center;
+  }
 }
 
 .sidebar-logo {
-  position: absolute;
-  right: 0;
-  bottom: 18px;
+  display: inline-flex;
+}
+
+.sidebar-logo-button {
+  background-color: transparent;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 80%;
+
+  &:hover {
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    border: 1px solid rgba($color: #000000, $alpha: 0.2);
+  }
+}
+
+.sidebar-title-container {
+  display: inline-flex;
+  flex-direction: column;
 }
 
 .sidebar-title {

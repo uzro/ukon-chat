@@ -2,9 +2,12 @@ import cn from "./cn";
 import en from "./en";
 import jp from "./jp";
 import { merge } from "../utils/merge";
+import { safeLocalStorage } from "@/app/utils";
 
 import type { LocaleType } from "./cn";
 export type { LocaleType, PartialLocaleType } from "./cn";
+
+const localStorage = safeLocalStorage();
 
 const ALL_LANGS = {
   cn,
@@ -34,17 +37,11 @@ merge(fallbackLang, targetLang);
 export default fallbackLang as LocaleType;
 
 function getItem(key: string) {
-  try {
-    return localStorage.getItem(key);
-  } catch {
-    return null;
-  }
+  return localStorage.getItem(key);
 }
 
 function setItem(key: string, value: string) {
-  try {
-    localStorage.setItem(key, value);
-  } catch {}
+  localStorage.setItem(key, value);
 }
 
 function getLanguage() {
@@ -88,4 +85,19 @@ export function getISOLang() {
 
   const lang = getLang();
   return isoLangString[lang] ?? lang;
+}
+
+const DEFAULT_STT_LANG = "zh-CN";
+export const STT_LANG_MAP: Record<Lang, string> = {
+  cn: "zh-CN",
+  en: "en-US",
+  jp: "ja-JP",
+};
+
+export function getSTTLang(): string {
+  try {
+    return STT_LANG_MAP[getLang()];
+  } catch {
+    return DEFAULT_STT_LANG;
+  }
 }
