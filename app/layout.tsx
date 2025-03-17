@@ -9,10 +9,10 @@ import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import { getServerSideConfig } from "./config/server";
 
 export const metadata: Metadata = {
-  title: "UkonChat",
+  title: "ChatBangiee",
   description: "Your personal ChatGPT Chat Bot.",
   appleWebApp: {
-    title: "UkonChat",
+    title: "ChatBangiee",
     statusBarStyle: "default",
   },
 };
