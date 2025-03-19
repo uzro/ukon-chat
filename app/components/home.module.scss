@@ -163,14 +163,10 @@
   border: 1px solid transparent;
   border-radius: 80%;
 
-  &:hover {
-    // background-color: rgba($color: #000000, $alpha: 0.2);
-    // border: 1px solid rgba($color: #000000, $alpha: 0.2);
+  &:hover,
+  &:active {
     svg {
-      // width: 45px;
-      // height: 45px;
-      background-color: rgba($color: #e2f628, $alpha: 0.2);
-      border-radius: 80%;
+      opacity: 0.5;
     }
   }
 }
