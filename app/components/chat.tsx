@@ -9,11 +9,7 @@ import React, {
   useState,
 } from "react";
 
-import SendWhiteIcon from "../icons/send-white.svg";
 import BrainIcon from "../icons/brain.svg";
-import RenameIcon from "../icons/rename.svg";
-import EditIcon from "../icons/rename.svg";
-import ExportIcon from "../icons/share.svg";
 import ReturnIcon from "../icons/return.svg";
 import CopyIcon from "../icons/copy.svg";
 import SpeakIcon from "../icons/speak.svg";
@@ -22,14 +18,11 @@ import LoadingIcon from "../icons/three-dots.svg";
 import LoadingButtonIcon from "../icons/loading.svg";
 import PromptIcon from "../icons/prompt.svg";
 import MaskIcon from "../icons/mask.svg";
-import MaxIcon from "../icons/max.svg";
-import MinIcon from "../icons/min.svg";
 import ResetIcon from "../icons/reload.svg";
 import ReloadIcon from "../icons/reload.svg";
 import BreakIcon from "../icons/break.svg";
 import SettingsIcon from "../icons/chat-settings.svg";
 import DeleteIcon from "../icons/clear.svg";
-import PinIcon from "../icons/pin.svg";
 import ConfirmIcon from "../icons/confirm.svg";
 import CloseIcon from "../icons/close.svg";
 import CancelIcon from "../icons/cancel.svg";
@@ -95,7 +88,6 @@ import {
   Modal,
   Selector,
   showConfirm,
-  showPrompt,
   showToast,
 } from "./ui-lib";
 import { useNavigate } from "react-router-dom";
@@ -116,7 +108,7 @@ import { prettyObject } from "../utils/format";
 import { ExportMessageModal } from "./exporter";
 import { getClientConfig } from "../config/client";
 import { useAllModels } from "../utils/hooks";
-import { ClientApi, MultimodalContent } from "../client/api";
+import { ClientApi } from "../client/api";
 import { createTTSPlayer } from "../utils/audio";
 import { MsEdgeTTS, OUTPUT_FORMAT } from "../utils/ms_edge_tts";
 
@@ -1724,7 +1716,7 @@ function _Chat() {
                 }}
               />
             </div>
-            {!isMobileScreen && (
+            {/* {!isMobileScreen && (
               <div className="window-action-button">
                 <IconButton
                   icon={<RenameIcon />}
@@ -1734,8 +1726,8 @@ function _Chat() {
                   onClick={() => setIsEditingMessage(true)}
                 />
               </div>
-            )}
-            <div className="window-action-button">
+            )} */}
+            {/* <div className="window-action-button">
               <IconButton
                 icon={<ExportIcon />}
                 bordered
@@ -1744,8 +1736,8 @@ function _Chat() {
                   setShowExport(true);
                 }}
               />
-            </div>
-            {showMaxIcon && (
+            </div> */}
+            {/* {showMaxIcon && (
               <div className="window-action-button">
                 <IconButton
                   icon={config.tightBorder ? <MinIcon /> : <MaxIcon />}
@@ -1759,7 +1751,7 @@ function _Chat() {
                   }}
                 />
               </div>
-            )}
+            )} */}
           </div>
 
           <PromptToast
@@ -1807,7 +1799,7 @@ function _Chat() {
                         <div className={styles["chat-message-container"]}>
                           <div className={styles["chat-message-header"]}>
                             <div className={styles["chat-message-avatar"]}>
-                              <div className={styles["chat-message-edit"]}>
+                              {/* <div className={styles["chat-message-edit"]}>
                                 <IconButton
                                   icon={<EditIcon />}
                                   aria={Locale.Chat.Actions.Edit}
@@ -1847,9 +1839,9 @@ function _Chat() {
                                     );
                                   }}
                                 ></IconButton>
-                              </div>
+                              </div> */}
                               {isUser ? (
-                                <Avatar avatar={config.avatar} />
+                                ""
                               ) : (
                                 <>
                                   {["system"].includes(message.role) ? (
@@ -1872,7 +1864,7 @@ function _Chat() {
                               </div>
                             )}
 
-                            {showActions && (
+                            {showActions && !isUser && (
                               <div className={styles["chat-message-actions"]}>
                                 <div className={styles["chat-input-actions"]}>
                                   {message.streaming ? (
@@ -1891,19 +1883,19 @@ function _Chat() {
                                         onClick={() => onResend(message)}
                                       />
 
-                                      <ChatAction
+                                      {/* <ChatAction
                                         text={Locale.Chat.Actions.Delete}
                                         icon={<DeleteIcon />}
                                         onClick={() =>
                                           onDelete(message.id ?? i)
                                         }
-                                      />
+                                      /> */}
 
-                                      <ChatAction
+                                      {/* <ChatAction
                                         text={Locale.Chat.Actions.Pin}
                                         icon={<PinIcon />}
                                         onClick={() => onPinMessage(message)}
-                                      />
+                                      /> */}
                                       <ChatAction
                                         text={Locale.Chat.Actions.Copy}
                                         icon={<CopyIcon />}
@@ -2045,7 +2037,7 @@ function _Chat() {
                 onPromptSelect={onPromptSelect}
               />
 
-              <ChatActions
+              {/* <ChatActions
                 uploadImage={uploadImage}
                 setAttachImages={setAttachImages}
                 setUploading={setUploading}
@@ -2067,7 +2059,7 @@ function _Chat() {
                 setShowShortcutKeyModal={setShowShortcutKeyModal}
                 setUserInput={setUserInput}
                 setShowChatSidePanel={setShowChatSidePanel}
-              />
+              /> */}
               <label
                 className={clsx(styles["chat-input-panel-inner"], {
                   [styles["chat-input-panel-inner-attach"]]:
@@ -2116,13 +2108,13 @@ function _Chat() {
                     })}
                   </div>
                 )}
-                <IconButton
+                {/* <IconButton
                   icon={<SendWhiteIcon />}
                   text={Locale.Chat.Send}
                   className={styles["chat-input-send"]}
                   type="primary"
                   onClick={() => doSubmit(userInput)}
-                />
+                /> */}
               </label>
             </div>
           </div>
