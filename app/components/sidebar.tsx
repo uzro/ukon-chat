@@ -5,7 +5,6 @@ import styles from "./home.module.scss";
 import { IconButton } from "./button";
 import SettingsIcon from "../icons/settings.svg";
 import ChatGptIcon from "../icons/chatgpt.svg";
-import AddIcon from "../icons/add.svg";
 import DeleteIcon from "../icons/delete.svg";
 import McpIcon from "../icons/mcp.svg";
 import DragIcon from "../icons/drag.svg";
@@ -256,6 +255,7 @@ export function SideBar(props: { className?: string }) {
   const maskStore = useMaskStore();
   const masks = maskStore.getWithLang();
   const refiner = masks.find((mask) => mask.name === "Refiner");
+  const jt = masks.find((mask) => mask.name === "JP Expert");
 
   useEffect(() => {
     // 检查 MCP 是否启用
@@ -300,6 +300,28 @@ export function SideBar(props: { className?: string }) {
               shadow
             />
           )}
+          {jt && (
+            <IconButton
+              icon={<EmojiAvatar avatar={jt.avatar} />}
+              text={jt.name}
+              className={styles["sidebar-bar-button"]}
+              onClick={() => startChat(jt)}
+              shadow
+            />
+          )}
+          <IconButton
+            icon={<EmojiAvatar avatar="1f3ad" />}
+            text={shouldNarrow ? undefined : Locale.Mask.Name}
+            className={styles["sidebar-bar-button"]}
+            onClick={() => {
+              if (config.dontShowMaskSplashScreen !== true) {
+                navigate(Path.NewChat, { state: { fromHome: true } });
+              } else {
+                navigate(Path.Masks, { state: { fromHome: true } });
+              }
+            }}
+            shadow
+          />
           {/* <IconButton
             icon={<DiscoveryIcon />}
             text={shouldNarrow ? undefined : Locale.Discovery.Name}
@@ -358,21 +380,21 @@ export function SideBar(props: { className?: string }) {
             </div>
           </>
         }
-        secondaryAction={
-          <IconButton
-            icon={<AddIcon />}
-            text={shouldNarrow ? undefined : Locale.Home.NewChat}
-            onClick={() => {
-              if (config.dontShowMaskSplashScreen) {
-                chatStore.newSession();
-                navigate(Path.Chat);
-              } else {
-                navigate(Path.NewChat);
-              }
-            }}
-            shadow
-          />
-        }
+        // secondaryAction={
+        //   <IconButton
+        //     icon={<AddIcon />}
+        //     text={shouldNarrow ? undefined : Locale.Home.NewChat}
+        //     onClick={() => {
+        //       if (config.dontShowMaskSplashScreen) {
+        //         chatStore.newSession();
+        //         navigate(Path.Chat);
+        //       } else {
+        //         navigate(Path.NewChat);
+        //       }
+        //     }}
+        //     shadow
+        //   />
+        // }
       />
     </SideBarContainer>
   );

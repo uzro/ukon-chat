@@ -28,7 +28,7 @@ export const EN_MASKS: BuiltinMask[] = [
   //   createdAt: 1688899480410,
   // },
   {
-    avatar: "2328-fe0f",
+    avatar: "1f58d-fe0f",
     name: "Refiner",
     context: [
       {
@@ -50,6 +50,32 @@ export const EN_MASKS: BuiltinMask[] = [
         role: "user",
         content:
           "And why you think this would be better than the original sentence, please describe your reasoning",
+        date: "",
+      },
+    ],
+    modelConfig: {
+      model: "gpt-4o-mini",
+      temperature: 0.3,
+      max_tokens: 2000,
+      presence_penalty: 0,
+      frequency_penalty: 0,
+      sendMemory: true,
+      historyMessageCount: 4,
+      compressMessageLengthThreshold: 1000,
+    },
+    lang: "en",
+    builtin: true,
+    createdAt: 1688899480410,
+  },
+  {
+    avatar: "1f202-fe0f",
+    name: "JP Expert",
+    context: [
+      {
+        id: "jt-0",
+        role: "user",
+        content:
+          "我会给你一段中文或者日文的文本，你需要理解并翻译成日文或者输出更自然的日文，确保输出的文本准确自然。",
         date: "",
       },
     ],

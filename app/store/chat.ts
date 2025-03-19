@@ -305,6 +305,16 @@ export const useChatStore = createPersistStore(
       },
 
       newSession(mask?: Mask) {
+        // avoid creating new session with the same mask
+        const latestSession = get().sessions[0];
+        if (
+          latestSession.messages.length === 0 &&
+          (mask?.name === latestSession.mask.name ||
+            (!mask && latestSession.topic === DEFAULT_TOPIC))
+        ) {
+          return;
+        }
+
         const session = createEmptySession();
 
         if (mask) {
@@ -716,7 +726,9 @@ export const useChatStore = createPersistStore(
                   session,
                   (session) =>
                     (session.topic =
-                      message.length > 0 ? trimTopic(message) : DEFAULT_TOPIC),
+                      message.length > 0
+                        ? trimTopic(message)
+                        : DEFAULT_TOPIC + " 123"),
                 );
               }
             },
