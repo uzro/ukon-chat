@@ -25,7 +25,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { isIOS, useMobileScreen } from "../utils";
 import dynamic from "next/dynamic";
-import { Selector, showConfirm } from "./ui-lib";
+import { showConfirm } from "./ui-lib";
 import clsx from "clsx";
 import { isMcpEnabled } from "../mcp/actions";
 import { EmojiAvatar } from "./emoji";
@@ -239,7 +239,7 @@ export function SideBarTail(props: {
 export function SideBar(props: { className?: string }) {
   useHotKey();
   const { onDragStart, shouldNarrow } = useDragSideBar();
-  const [showDiscoverySelector, setshowDiscoverySelector] = useState(false);
+  // const [showDiscoverySelector, setshowDiscoverySelector] = useState(false);
   const navigate = useNavigate();
   const config = useAppConfig();
   const chatStore = useChatStore();
@@ -254,8 +254,6 @@ export function SideBar(props: { className?: string }) {
 
   const maskStore = useMaskStore();
   const masks = maskStore.getWithLang();
-  const refiner = masks.find((mask) => mask.name === "Refiner");
-  const jt = masks.find((mask) => mask.name === "JP Expert");
 
   useEffect(() => {
     // 检查 MCP 是否启用
@@ -291,24 +289,16 @@ export function SideBar(props: { className?: string }) {
               shadow
             />
           )}
-          {refiner && (
+          {masks.map((mask) => (
             <IconButton
-              icon={<EmojiAvatar avatar={refiner.avatar} />}
-              text={refiner.name}
+              key={mask.id}
+              icon={<EmojiAvatar avatar={mask.avatar} />}
+              text={mask.name}
               className={styles["sidebar-bar-button"]}
-              onClick={() => startChat(refiner)}
+              onClick={() => startChat(mask)}
               shadow
             />
-          )}
-          {jt && (
-            <IconButton
-              icon={<EmojiAvatar avatar={jt.avatar} />}
-              text={jt.name}
-              className={styles["sidebar-bar-button"]}
-              onClick={() => startChat(jt)}
-              shadow
-            />
-          )}
+          ))}
           <IconButton
             icon={<EmojiAvatar avatar="1f3ad" />}
             text={shouldNarrow ? undefined : Locale.Mask.Name}
@@ -330,7 +320,7 @@ export function SideBar(props: { className?: string }) {
             shadow
           /> */}
         </div>
-        {showDiscoverySelector && (
+        {/* {showDiscoverySelector && (
           <Selector
             items={[
               ...DISCOVERY.map((item) => {
@@ -345,7 +335,7 @@ export function SideBar(props: { className?: string }) {
               navigate(s[0], { state: { fromHome: true } });
             }}
           />
-        )}
+        )} */}
       </SideBarHeader>
       <SideBarBody
         onClick={(e) => {
